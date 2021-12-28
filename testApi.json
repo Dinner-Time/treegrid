@@ -1,0 +1,57 @@
+[
+    {
+        "depth": "4",
+        "code": "MES1000",
+        "motherCode": "MES0100"
+    },
+    {
+        "depth": "3",
+        "code": "MES0103",
+        "motherCode": "MES0011"
+    },
+    {
+        "depth": "5",
+        "code": "MES9999",
+        "motherCode": "MES1001"
+    },
+    {
+        "depth": "4",
+        "code": "MES1001",
+        "motherCode": "MES0100"
+    },
+    {
+        "depth": "4",
+        "code": "MES1002",
+        "motherCode": "MES0101"
+    },
+    {
+        "depth": "3",
+        "code": "MES0100",
+        "motherCode": "MES0010"
+    },
+    {
+        "depth": "3",
+        "code": "MES0101",
+        "motherCode": "MES0011"
+    },
+    {
+        "depth": "2",
+        "code": "MES0010",
+        "motherCode": "MES0001"
+    },
+    {
+        "depth": "2",
+        "code": "MES0011",
+        "motherCode": "MES0002"
+    },
+    {
+        "depth": "1",
+        "code": "MES0001",
+        "motherCode": ""
+    },
+    {
+        "depth": "1",
+        "code": "MES0002",
+        "motherCode": ""
+    }
+]
