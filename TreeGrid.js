@@ -198,12 +198,12 @@ class TreeGridUtil extends tui.Grid {
     addRow(parentRow, isHighest = false) {
         // 필수 데이터 세팅
         const row = {};
-        // treecolunm 값 설정
-        row[this.store.column.treeColumnName] = this.category[depth];
-        // 부모코드 값 설정 : 최상위 행 일 경우 '', 아닐 경우 부모 행의 code
-        row['motherCode'] = isHighest ? '' : parentRow.code;
         // depth 값 설정 : 최상위 행 일 경우 자기자신 depth, 아닐 경우 자기자신 depth + 1
         row['depth'] = isHighest ? Number(parentRow.depth) : Number(parentRow.depth) + 1;
+        // treecolunm 값 설정
+        row[this.store.column.treeColumnName] = this.category[row['depth']];
+        // 부모코드 값 설정 : 최상위 행 일 경우 '', 아닐 경우 부모 행의 code
+        row['motherCode'] = isHighest ? '' : parentRow.code;
         // 행 추가 : 최상위 행 일 경우 appendRow, 아닐 경우 appendTreeRow
         isHighest ? this.appendRow(row) : this.appendTreeRow(row, { parentRowKey: parentRow.rowKey });
     }
