@@ -80,16 +80,20 @@ class TreeGridUtil extends tui.Grid {
         });
 
         // 그리드 수정 이벤트 정의
-        this.on('editingFinish', ({ rowKey, value, columnName }) => {
+        this.on('editingFinish', (e) => {
+            const { rowKey, value, columnName } = e;
+            this.getElement(rowKey, 'code').children[0].innerHTML = value;
             // code 칼럼 수정 시
             if (columnName === 'code') {
                 // 자식 행 배열찾기
-                const arr = this.getRow(rowKey)._children;
+                const arr = !this.getRow(rowKey)._children ? [] : this.getRow(rowKey)._children;
                 // 자식 행이 존재할 경우
                 if (arr.length) {
                     // 자식 행들의 motherCode를 수정한 code로 변경
-                    arr.forEach(({ rowKey }) => {
+                    arr.forEach((row) => {
+                        const { rowKey } = row;
                         this.setValue(rowKey, 'motherCode', value);
+                        this.getElement(rowKey, 'motherCode').children[0].innerHTML = value;
                     });
                 }
             }
@@ -113,7 +117,7 @@ class TreeGridUtil extends tui.Grid {
             item[this.store.column.treeColumnName] = this.category[item.depth]; // treecolumn에 들어갈 내용
 
             /**
-             * 1. 임시 배열 내의 각 배열에 (tempArr = [[],[],[],[], ...])
+             * 1. 임시 배열 내의 각 배열에 (tempArr = [[],[], ...])
              * 2. depth 순서대로 요소 넣기 (tempArr = [[depth=1, depth=1], [depth=2, depth=2], ...])
              *      ** 배열의 요소는 index가 0부터 시작, 따라서 depth-1의 자리에 요소들을 넣는다.
              */
@@ -223,26 +227,10 @@ const grid = new TreeGridUtil(
             useCascadingCheckbox: true,
         },
         columns: [
-            {
-                header: '구분',
-                name: 'category',
-                align: 'left',
-            },
-            {
-                header: '코드',
-                name: 'code',
-                align: 'left',
-                editor: 'text',
-            },
-            {
-                header: '부모 코드',
-                name: 'motherCode',
-                align: 'left',
-            },
-            {
-                header: 'depth',
-                name: 'depth',
-            },
+            { header: '구분', name: 'category', align: 'left' },
+            { header: '코드', name: 'code', align: 'left', editor: 'text' },
+            { header: '부모 코드', name: 'motherCode', align: 'left' },
+            { header: 'depth', name: 'depth' },
         ],
     },
     5,
